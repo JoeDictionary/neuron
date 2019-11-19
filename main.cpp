@@ -7,6 +7,10 @@ using namespace std;
 class Neuron
 {
 public:
+    Neuron(vector<double> (*func)()){
+        activationFunction = func;
+    }
+
     double &weightRef(int index){
         return weights[index];
     }
@@ -15,7 +19,6 @@ public:
         return weights;
     }
 
-    // derivative missing
     vector<double> softmax(vector<double> z){
         vector<double> outputVec;
         vector<double> numerators;
@@ -33,13 +36,23 @@ public:
         return outputVec;
     }
 
+    vector<double> softmaxDeriv(vector<double> z){
+        vector<double> outputVec;
+        vector<double> softmaxVec = softmax(z);
+        for (double i : softmaxVec){
+            outputVec.push_back(i * (1 - i));
+        }
+        return outputVec;
+    }
+
 private:
-    /*
-     * Vector of weights on connections to the next layer, also means the amount of neurons in the next
+    /* Vector of weights on connections to the next layer, also means the amount of neurons in the next
      * layer if in a connected neural network. The first weight corresponds to the first neuron of the next layer
      * and so forth.
      */
     vector<double> weights;
+    /* Pointer to the activation function set by the constructor.*/
+    vector<double> (*activationFunction)();
 
 };
 
@@ -48,9 +61,9 @@ int main(int argc, char *argv[])
     QCoreApplication a(argc, argv);
     Neuron myNeuron;
 
-    vector<double> inputVec = {1000, 2000, 3000};
+    vector<double> inputVec = {-1, 0, 5, 10};
 
-    vector<double> outputVec = myNeuron.softmax(inputVec);
+    vector<double> outputVec = myNeuron.softmaxDeriv(inputVec);
     for (double i : outputVec){
         cout << i << endl;
     }
