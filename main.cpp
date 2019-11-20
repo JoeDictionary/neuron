@@ -4,30 +4,16 @@
 #include <iostream>
 #include <neuron.h>
 #include <neuralnet.h>
+#include <ActivationFunctions.h>
 using namespace std;
 
-vector<double> softmax(vector<double> z){
-        vector<double> outputVec;
-        vector<double> numerators;
-        double denominator = 0;
-
-        for(double i : z){
-            double power = exp(i);
-            denominator += power;
-            numerators.push_back(power);
-        }
-
-        for (double i : numerators) {
-            outputVec.push_back(i / denominator);
-        }
-        return outputVec;
-    }
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-    Neuron myNeuron(softmax);
+
+    Neuron myNeuron;
     vector<double> inputVec = {-1, 0, 5, 10};
 
     vector<double> outputVec = myNeuron.activate(inputVec);
@@ -35,6 +21,9 @@ int main(int argc, char *argv[])
         cout << i << endl;
     }
 
-    return a.exec();
+    NeuralNet myNet({10, 4, 2});
+    cout << "Hello, World!" << endl;
+    cout << afunc::softmax(inputVec)[0] << endl;
 
+    return a.exec();
 }
