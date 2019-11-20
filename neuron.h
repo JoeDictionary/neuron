@@ -7,11 +7,12 @@ using namespace std;
 class Neuron
 {
 public:
-    Neuron(vector<double> (*func)());
+    Neuron(vector<double> (*func)(vector<double>));
     double &weightRef(int index);
     vector<double> &weightsRef();
     vector<double> softmax(vector<double> z);
     vector<double> softmaxDeriv(vector<double> z);
+    vector<double> activate(vector<double> z);
 
 private:
     /* Vector of weights on connections to the next layer, also means the amount of neurons in the next
@@ -20,7 +21,7 @@ private:
      */
     vector<double> weights;
     /* Pointer to the activation function set by the constructor.*/
-    vector<double> (*activationFunction)();
+    vector<double> (*activationFunction)(vector<double>);
 };
 
 #endif // NEURON_H

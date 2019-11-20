@@ -5,7 +5,7 @@
 #include <iostream>
 using namespace std;
 
-Neuron::Neuron(vector<double> (*func)())
+Neuron::Neuron(vector<double> (*func)(vector<double>))
 {
     activationFunction = func;
 }
@@ -43,3 +43,15 @@ vector<double> Neuron::softmaxDeriv(vector<double> z){
         }
         return outputVec;
     }
+
+vector<double> Neuron::activate(vector<double> z){
+    vector<double> outputVec = activationFunction(z);
+    return outputVec;
+}
+
+
+
+
+
+
+
