@@ -7,23 +7,36 @@
 #include <ActivationFunctions.h>
 using namespace std;
 
+int printConfirm(int num){
+    return num - 4;
+}
+
 
 int main(int argc, char *argv[])
 {
     QCoreApplication a(argc, argv);
 
-
-    Neuron myNeuron;
+    // Test Vector
     vector<double> inputVec = {-1, 0, 5, 10};
 
-    vector<double> outputVec = myNeuron.activate(inputVec);
-    for (double i : outputVec){
-        cout << i << endl;
-    }
+    // Vector of pairs for initializing a 'NeuralNet' object.
+    vector< pair <int, vector<double> (*)(vector<double>)> > topologyVec = {
+            pair<int, vector<double> (*)(vector<double>)>(10, afunc::lRelu),
+            pair<int, vector<double> (*)(vector<double>)>(5, afunc::lRelu),
+            pair<int, vector<double> (*)(vector<double>)>(5, afunc::lRelu),
+            pair<int, vector<double> (*)(vector<double>)>(2, afunc::softmax),
+};
 
-    NeuralNet myNet({10, 4, 2});
-    cout << "Hello, World!" << endl;
-    cout << afunc::softmax(inputVec)[0] << endl;
+    // Initialization of a 'NeuralNet' using previously defined 'topologyVec'.
+    NeuralNet myNet(topologyVec);
+    // Sizecheck to see if the net was created with the right amount of layers.
+    cout << myNet.net.size() << endl;
+
+    /*
+    vector<vector<double> (*)(vector<double>)> funcVec;
+    funcVec.push_back(afunc::lRelu);
+    cout << "lRelu: " << (funcVec[0])(inputVec)[0] << endl;
+    */
 
     return a.exec();
 }
