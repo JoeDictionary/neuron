@@ -17,6 +17,11 @@ namespace afunc {
             return outputVec;
     }
 
+    double softmax_at_index(vector<double> z, int index){
+            double output = softmax(z).at(index);
+            return output;
+    }
+
     vector<double> softmaxDeriv(vector<double> z){
             vector<double> outputVec;
             vector<double> softmaxVec = softmax(z);
@@ -32,6 +37,11 @@ namespace afunc {
             outputVec.push_back(max(0.1*i, i));
         }
         return outputVec;
+    }
+
+    double lRelu_at_index(vector<double> z, int index){
+            double output = lRelu(z).at(index);
+            return output;
     }
 
     vector<double> lReluDeriv(vector<double> z){

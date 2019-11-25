@@ -12,6 +12,8 @@ namespace afunc
     vector<double> softmaxDeriv(vector<double> z);
     vector<double> lRelu(vector<double> z);
     vector<double> lReluDeriv(vector<double> z);
+    double softmax_at_index(vector<double>, int);
+    double lRelu_at_index(vector<double>, int);
 }
 
 #endif // ACTIVATIONFUNCTIONS_H
