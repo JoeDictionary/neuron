@@ -9,6 +9,10 @@ Neuron::Neuron(vector<double> (*func)(vector<double>))
     activationFunction = func;
 }
 
+void Neuron::input(double x) {
+    containedValue = x;
+}
+
 double& Neuron::weightRef(int index){
         return weights[index];
     }
@@ -16,6 +20,7 @@ double& Neuron::weightRef(int index){
 vector<double>& Neuron::weightsRef(){
         return weights;
     }
+
 
 vector<double> Neuron::activate(vector<double> z){
     vector<double> outputVec = activationFunction(z);

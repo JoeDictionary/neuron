@@ -7,16 +7,51 @@
  * The first pair in the vector of pairs represents the input layer, the last pait represents the output layer and
  * every pair inbetween represents a hidden layer.
  */
-NeuralNet::NeuralNet(vector< pair <int, vector<double> (*)(vector<double>)> > topology)
+NeuralNet::NeuralNet(vector< pair <int, double (*)(double)> > topology)
 {
     /* Fills the 'net' vector with vectors<Neuron> to represent a neural network. */
-    for(pair <int, vector<double> (*)(vector<double>)> i : topology){
+    for(pair <int, double (*)(double)> i : topology){
         addLayer(i.first, i.second);
     }
 }
 
-void NeuralNet::addLayer(int neuronAmt, vector<double> (*func)(vector<double>))
+// ??? Do i need an overload for this function ???
+void NeuralNet::addLayer(int neuronAmt, double (*func)(double))
 {
-    net.push_back(vector<Neuron>(neuronAmt, Neuron(func)));
+    vector<Neuron> layer;
+    for (int i = 0; i < neuronAmt; i++){
+        Neuron p(func);
+        layer.push_back(p);
+    }
+    net.push_back(layer);
 }
 
+void NeuralNet::addLayer(int neuronAmt, double (*func)(double, double))
+{
+    vector<Neuron> layer;
+    for (int i = 0; i < neuronAmt; i++){
+        Neuron p(func);
+        layer.push_back(p);
+    }
+    net.push_back(layer);
+}
+
+vector<double> NeuralNet::activateLayer(vector<Neuron>& layer)
+{
+    /*
+    vector<double> (*aFunc)(vector<double>) = layer[0].activationFunction;
+    vector<double> rawLayer;
+    vector<double> activatedLayer;
+
+    // Fill 'rawLayer' with not activated values from the 'layer' neurons.
+    for (Neuron i : layer){
+        rawLayer.push_back(i.containedValue);
+    }
+
+    activatedLayer = aFunc(rawLayer);
+
+    for (int i = 0; i < activatedLayer.size(); i++) {
+        (layer[i]).containedValue = activatedLayer[i];
+    }
+    */
+}

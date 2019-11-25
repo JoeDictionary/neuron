@@ -1,29 +1,21 @@
 #include <ActivationFunctions.h>
 namespace afunc {
-    vector<double> softmax(vector<double> z){
-            vector<double> outputVec;
-            vector<double> numerators;
-            double denominator = 0;
 
-            for(double i : z){
-                double power = exp(i);
-                denominator += power;
-                numerators.push_back(power);
-            }
-
-            for (double i : numerators) {
-                outputVec.push_back(i / denominator);
-            }
-            return outputVec;
+    double calcDenominator(vector<double> z) {
+        double denominator = 0;
+        for (double i : z){
+            denominator += exp(i);
+        }
+        return denominator
     }
 
-    vector<double> softmaxDeriv(vector<double> z){
-            vector<double> outputVec;
-            vector<double> softmaxVec = softmax(z);
-            for (double i : softmaxVec){
-                outputVec.push_back(i * (1 - i));
-            }
-            return outputVec;
+    double softmax(double x, double denominator){
+            return exp(x) / denominator;
+    }
+
+    double softmaxDeriv(double x, double denominator){
+        double S = softmax(x, denominator);
+            return S*(1 - S);
     }
 
     vector<double> lRelu(vector<double> z){

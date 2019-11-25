@@ -20,11 +20,11 @@ int main(int argc, char *argv[])
     vector<double> inputVec = {-1, 0, 5, 10};
 
     // Vector of pairs for initializing a 'NeuralNet' object.
-    vector< pair <int, vector<double> (*)(vector<double>)> > topologyVec = {
-            pair<int, vector<double> (*)(vector<double>)>(10, afunc::lRelu),
-            pair<int, vector<double> (*)(vector<double>)>(5, afunc::lRelu),
-            pair<int, vector<double> (*)(vector<double>)>(5, afunc::lRelu),
-            pair<int, vector<double> (*)(vector<double>)>(2, afunc::softmax),
+    vector< pair <int, double (*)(double)>> topologyVec = {
+            pair<int, double (*)(double)> (10, afunc::lRelu),
+            pair<int, double (*)(double)> (5, afunc::lRelu),
+            pair<int, double (*)(double)> (5, afunc::lRelu),
+            pair<int, double (*)(double)> (2, afunc::softmax)
 };
 
     // Initialization of a 'NeuralNet' using previously defined 'topologyVec'.

@@ -8,10 +8,10 @@ using namespace std;
 
 namespace afunc
 {
-    vector<double> softmax(vector<double> z);
-    vector<double> softmaxDeriv(vector<double> z);
-    vector<double> lRelu(vector<double> z);
-    vector<double> lReluDeriv(vector<double> z);
+    double softmax(double x, double denominator);
+    double softmaxDeriv(double x, double denominator);
+    double lRelu(double x);
+    double lReluDeriv(double x);
 }
 
 #endif // ACTIVATIONFUNCTIONS_H
