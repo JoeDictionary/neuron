@@ -6,7 +6,7 @@ namespace afunc {
         for (double i : z){
             denominator += exp(i);
         }
-        return denominator
+        return denominator;
     }
 
     double softmax(double x, double denominator){
@@ -18,24 +18,15 @@ namespace afunc {
             return S*(1 - S);
     }
 
-    vector<double> lRelu(vector<double> z){
-        vector<double> outputVec;
-        for (double i : z){
-            outputVec.push_back(max(0.1*i, i));
-        }
-        return outputVec;
+    double lRelu(double x, double useless){
+        return max(0.1*x, x);
     }
 
-    vector<double> lReluDeriv(vector<double> z){
-        vector<double> outputVec;
-
-        for(double i : z){
-            if(i >= 0){
-                outputVec.push_back(1);
+    double lReluDeriv(double x, double useless){
+            if(x >= 0){
+                return 1;
             } else {
-                outputVec.push_back(0.01);
+                return 0.01;
             }
-        }
-        return outputVec;
     }
 }

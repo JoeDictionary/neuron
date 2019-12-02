@@ -6,14 +6,12 @@
 class NeuralNet
 {
 public:
-    NeuralNet(vector< pair <int, double (*)(double)> > topology);
-    NeuralNet(vector< pair <int, double (*)(double, double)> > topology);
+    NeuralNet(vector< pair <int, double (*)(double, double)>> topology);
 
     vector<vector<Neuron>> net;
     vector<double> activateLayer(vector<Neuron>& layer);
 
 private:
-    void addLayer(int neurons, double (*func)(double));
     void addLayer(int neurons, double (*func)(double, double));
 };
 

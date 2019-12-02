@@ -4,13 +4,9 @@
 using namespace std;
 
 
-Neuron::Neuron(vector<double> (*func)(vector<double>))
+Neuron::Neuron(double (*func)(double, double))
 {
     activationFunction = func;
-}
-
-void Neuron::input(double x) {
-    containedValue = x;
 }
 
 double& Neuron::weightRef(int index){
@@ -22,12 +18,11 @@ vector<double>& Neuron::weightsRef(){
     }
 
 
-vector<double> Neuron::activate(vector<double> z){
-    vector<double> outputVec = activationFunction(z);
-    return outputVec;
+double Neuron::activate(double z){
+    return activationFunction(z);
 }
 
-void Neuron::setActivation(vector<double> (*func)(vector<double>))
+void Neuron::setActivation(double (*func)(double))
 {
     activationFunction = func;
 }
