@@ -3,6 +3,9 @@
 #include <neuron.h>
 #include <ActivationFunctions.h>
 
+#include <QDirIterator>
+#include <QtDebug>
+
 class NeuralNet
 {
 public:
@@ -19,16 +22,32 @@ public:
      * and every element of the inner vector (vector of neurons) represents a neuron in the layer. */
     vector<vector<Neuron>> net;
 
-    /*  */
+    /* Amount of files to load in one batch. Used by the 'loadBatch' function. */
+    int batchSize = 10;
+
+    /* NOT IMPLEMENTED */
     vector<double> activateLayer(vector<Neuron>& layer);
 
     /* Generates random weights. */
     double randWeight();
 
+    /* Loads training data into the 'trainingData' vector. */
+    void loadBatch();
+
+    /* Feeds the input layer of the neural net with first entry of 'training data'. */
+    // ??? Maybe delete the entry as well, .clear() in loadBatach would not be needed ???
+    void feedInput();
+
 private:
     /* Adds a vector of neurons, representing a layer in a neural net, to the 'net' vector. Sets each neuron's
     activation function to 'func'. */
     void addLayer(int neurons, double (*func)(double, double));
+
+    /* Contains current batch of training data. */
+    QStringList trainingData;
+
+    /* Directory iterator for iterating over training files. */
+    QDirIterator* dirIterator = new QDirIterator("C:/Users/Filip/Desktop/dataset_half/nqgp", QDir::Files);
 };
 
 #endif // NEURALNET_H

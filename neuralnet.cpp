@@ -42,3 +42,39 @@ double NeuralNet::randWeight()
 {
 
 }
+
+void NeuralNet::loadBatch()
+{
+    // Clears 'trainingData' list from already used data.
+    trainingData.clear();
+
+    for(int i=0;i < batchSize; i++){
+        QFile file(dirIterator->next());
+        qDebug() << dirIterator->fileName();
+        file.open(QIODevice::ReadOnly);
+        trainingData.append(file.readAll());
+    }
+    qDebug() << "(loadBatch) Next Batch Loaded!";
+}
+
+void NeuralNet::feedInput()
+{
+
+    QList<int> inputDataList;
+    /* split data into numbers
+     * set each Neuron's 'currentVal' to the corresponding number in the split data
+     * eventually delete the used datapoint
+    */
+
+    // for(int i = 0; i < net[0].size(); i++)
+
+    // Splits first entry in string in 'trainingData' into strings of
+    for(QString i : trainingData[0].split(QRegExp("\\s+"), QString::SkipEmptyParts)) {
+        inputDataList.append(i.toInt());
+    }
+    qDebug() << "Input file size: " << inputDataList.size();
+    // qDebug() << inputDataList;
+}
+
+
+

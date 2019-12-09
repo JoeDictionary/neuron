@@ -38,11 +38,10 @@ int main(int argc, char *argv[])
     cout << "lRelu: " << (funcVec[0])(inputVec)[0] << endl;
     */
 
+    myNet.loadBatch();
+    myNet.loadBatch();
+    myNet.feedInput();
 
-    QDirIterator iter("C:/Users/Filip/Desktop/dataset_half/nqgp",QDirIterator::Subdirectories);
-    while (iter.hasNext()) {
-        qDebug() << iter.next();
-    }
 
     return a.exec();
 }
