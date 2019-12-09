@@ -9,7 +9,7 @@ using namespace std;
 class Neuron
 {
 public:
-    Neuron(vector<double> (*func)(vector<double>) = afunc::lRelu);
+    Neuron();//(vector<double> (double = afunc::lRelu);
 
     double &weightRef(int index);
     vector<double> &weightsRef();
@@ -19,15 +19,18 @@ public:
     int getNeuronCount();
     vector<double> getNeuronOutput();
     void setInput(double);
+    void setValue(double);
     void calculate(vector<double>, int);
+    double weight;
+    double value;
+    vector<double> weights;
+    void setWeightLength(int);
 
 private:
     /* Vector of weights on connections to the next layer, also means the amount of neurons in the next
      * layer if in a connected neural network. The first weight corresponds to the first neuron of the next layer
      * and so forth.
      */
-    vector<double> weights;
-    double value;
 
     /* Pointer to the activation function set by the constructor.*/
     vector<double> (*activationFunction)(vector<double>);

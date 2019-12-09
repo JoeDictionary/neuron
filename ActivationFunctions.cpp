@@ -1,6 +1,6 @@
 #include <ActivationFunctions.h>
-namespace afunc {
-    vector<double> softmax(vector<double> z){
+namespace afunc {/*
+    double softmax(vector<double> z){
             vector<double> outputVec;
             vector<double> numerators;
             double denominator = 0;
@@ -14,7 +14,7 @@ namespace afunc {
             for (double i : numerators) {
                 outputVec.push_back(i / denominator);
             }
-            return outputVec;
+            return outputVec.at(0);
     }
 
     double softmax_at_index(vector<double> z, int index){
@@ -22,29 +22,25 @@ namespace afunc {
             return output;
     }
 
-    vector<double> softmaxDeriv(vector<double> z){
+    double softmaxDeriv(vector<double> z){
             vector<double> outputVec;
-            vector<double> softmaxVec = softmax(z);
+            double softmaxVec = softmax(z);
             for (double i : softmaxVec){
                 outputVec.push_back(i * (1 - i));
             }
-            return outputVec;
-    }
+            return outputVec.at(0);
+    }*/
 
-    vector<double> lRelu(vector<double> z){
-        vector<double> outputVec;
-        for (double i : z){
-            outputVec.push_back(max(0.1*i, i));
-        }
-        return outputVec;
+    double lRelu(double i){
+        return max(0.1*i, i);
     }
-
+/*
     double lRelu_at_index(vector<double> z, int index){
             double output = lRelu(z).at(index);
             return output;
     }
 
-    vector<double> lReluDeriv(vector<double> z){
+    double lReluDeriv(vector<double> z){
         vector<double> outputVec;
 
         for(double i : z){
@@ -54,6 +50,6 @@ namespace afunc {
                 outputVec.push_back(0.01);
             }
         }
-        return outputVec;
-    }
+        return outputVec.at(0);
+    }*/
 }

@@ -6,7 +6,7 @@
 class NeuralNet
 {
 public:
-    NeuralNet(vector< pair <int, vector<double> (*)(vector<double>)> > topology);
+    NeuralNet(vector< pair <int, double (*)(double)> > topology);
     vector<vector<Neuron>> net;
 
     int layerCount = 0;
@@ -17,8 +17,10 @@ public:
     // 2c
     vector<Neuron> getOutputFromInput(vector<double> input);
 
+    void setupNeuralNetwork();
+
 private:
-    void addLayer(int neurons, vector<double> (*func)(vector<double>));
+    void addLayer(int neurons, double (*func)(double));
 
 };
 

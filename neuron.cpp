@@ -4,9 +4,9 @@
 using namespace std;
 
 
-Neuron::Neuron(vector<double> (*func)(vector<double>))
+Neuron::Neuron(/*vector<double> (*func)(double)*/)
 {
-    activationFunction = func;
+    //activationFunction = func;
 }
 
 double& Neuron::weightRef(int index){
@@ -54,11 +54,21 @@ void Neuron::setInput(double newInput){
     this->value=newInput;
 }
 
+void Neuron::setValue(double newInput){
+    this->value=newInput;
+}
+
 // apply our function to the neuron's input
 void Neuron::calculate(vector<double> inputs, int position){
     this->value=activationFunction(inputs).at(position);
 }
 
+void Neuron::setWeightLength(int length){
+    this->weights.clear();
+    for(int i=0; i<length; i++){
+        this->weights.push_back(1.0);
+    }
+}
 
 
 

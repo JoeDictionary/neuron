@@ -20,17 +20,33 @@ int main(int argc, char *argv[])
     vector<double> inputVec = {-1, 0, 5, 10};
 
     // Vector of pairs for initializing a 'NeuralNet' object.
-    vector< pair <int, vector<double> (*)(vector<double>)> > topologyVec = {
-            pair<int, vector<double> (*)(vector<double>)>(10, afunc::lRelu),
-            pair<int, vector<double> (*)(vector<double>)>(5, afunc::lRelu),
-            pair<int, vector<double> (*)(vector<double>)>(5, afunc::lRelu),
-            pair<int, vector<double> (*)(vector<double>)>(2, afunc::softmax),
+    vector< pair <int, double (*)(double)> > topologyVec = {
+            pair<int, double (*)(double)>(10, afunc::lRelu),
+            pair<int, double (*)(double)>(5, afunc::lRelu),
+            pair<int, double (*)(double)>(5, afunc::lRelu),
+            pair<int, double (*)(double)>(2, afunc::lRelu),
 };
 
     // Initialization of a 'NeuralNet' using previously defined 'topologyVec'.
     NeuralNet myNet(topologyVec);
     // Sizecheck to see if the net was created with the right amount of layers.
-    cout << myNet.net.size() << endl;
+    //cout << myNet.net.size() << endl;
+
+    vector<double> input;
+    input.push_back(5431.0);
+    input.push_back(2453.0);
+    input.push_back(4576.0);
+    input.push_back(7454.0);
+    input.push_back(641.0);
+    input.push_back(6542.0);
+    input.push_back(4563.0);
+    input.push_back(4999.0);
+    input.push_back(100.0);
+    input.push_back(200.0);
+
+    myNet.setupNeuralNetwork();
+
+    myNet.getOutputFromInput(input);
 
     /*
     vector<vector<double> (*)(vector<double>)> funcVec;
