@@ -59,21 +59,17 @@ void NeuralNet::loadBatch()
 
 void NeuralNet::feedInput()
 {
+    QList<int> processedData;
 
-    QList<int> inputDataList;
-    /* split data into numbers
-     * set each Neuron's 'currentVal' to the corresponding number in the split data
-     * eventually delete the used datapoint
-    */
-
-    // for(int i = 0; i < net[0].size(); i++)
-
-    // Splits first entry in string in 'trainingData' into strings of
+    // Splits first entry in string in 'trainingData' into strings of single digits, converts these to integers and appends them to 'processed' data.
     for(QString i : trainingData[0].split(QRegExp("\\s+"), QString::SkipEmptyParts)) {
-        inputDataList.append(i.toInt());
+        processedData.append(i.toInt());
     }
-    qDebug() << "Input file size: " << inputDataList.size();
-    // qDebug() << inputDataList;
+
+    // Sets every neuron's 'currentVal' in the input layer to the corresponding datapoint in 'processedData'.
+    for(int i = 0; net[0].size(); i++) {
+        net[0][i].currentVal = processedData[i];
+    }
 }
 
 
