@@ -3,7 +3,6 @@
 #include <iostream>
 using namespace std;
 
-
 Neuron::Neuron(double (*func)(double, double))
 {
     activationFunction = func;
@@ -17,12 +16,11 @@ vector<double>& Neuron::weightsRef(){
         return weights;
     }
 
-
-double Neuron::activate(double z){
-    return activationFunction(z);
+double Neuron::activate(double x, double denominator){
+    return activationFunction(x, denominator);
 }
 
-void Neuron::setActivation(double (*func)(double))
+void Neuron::setActivation(double (*func)(double, double))
 {
     activationFunction = func;
 }

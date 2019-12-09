@@ -1,10 +1,14 @@
 #include <QCoreApplication>
+#include <QDirIterator>
+#include <QtDebug>
+
 #include <vector>
 #include <math.h>
 #include <iostream>
 #include <neuron.h>
 #include <neuralnet.h>
 #include <ActivationFunctions.h>
+
 using namespace std;
 
 
@@ -33,6 +37,12 @@ int main(int argc, char *argv[])
     funcVec.push_back(afunc::lRelu);
     cout << "lRelu: " << (funcVec[0])(inputVec)[0] << endl;
     */
+
+
+    QDirIterator iter("C:/Users/Filip/Desktop/dataset_half/nqgp",QDirIterator::Subdirectories);
+    while (iter.hasNext()) {
+        qDebug() << iter.next();
+    }
 
     return a.exec();
 }
