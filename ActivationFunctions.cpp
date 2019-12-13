@@ -1,6 +1,7 @@
 #include <ActivationFunctions.h>
 namespace afunc {
 
+// 1b)
     double calcDenominator(vector<double> z) {
         double denominator = 0;
         for (double i : z){

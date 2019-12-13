@@ -1,4 +1,6 @@
 #include "neuralnet.h"
+#include <random>
+#include <ctime>
 
 NeuralNet::NeuralNet(vector< pair <int, double (*)(double, double)> > topology)
 {
@@ -17,10 +19,10 @@ void NeuralNet::addLayer(int neuronAmt, double (*func)(double, double))
     }
     net.push_back(layer);
 }
-
+/* Activates a layer (possibile from second layer) by going through every neuron */
 vector<double> NeuralNet::activateLayer(vector<Neuron>& layer)
 {
-    /*
+    /*ALT:
     vector<double> (*aFunc)(vector<double>) = layer[0].activationFunction;
     vector<double> rawLayer;
     vector<double> activatedLayer;
@@ -36,11 +38,28 @@ vector<double> NeuralNet::activateLayer(vector<Neuron>& layer)
         (layer[i]).containedValue = activatedLayer[i];
     }
     */
+
+    vector<double> activatedLayer;
+
+    // Fill 'activated' with activated values from the 'layer' neurons.
+    for (Neuron i : layer){
+        //! KANN MAN SO DIE AKTV.FUNKTION ANWENDEN?
+        activatedLayer.push_back(aFunc(calcX(i.currentVal,...)));
+    }
+
+    /* Updates values for the layer */
+    for (int i = 0; i < activatedLayer.size(); i++) {
+        (layer[i]).currentVal = activatedLayer[i];
+    }
 }
-
-double NeuralNet::randWeight()
+//! WO SOLL DIESE FUNKTION STEHEN
+/* Calculates a random weight for a Neuron */
+double NeuralNet::randWeight(double PrevLayerAmt)
 {
-
+    srand(time(0));
+    // Random double number [-1,1] is generated
+    double randN = ((double)rand()*2 / ((double)RAND_MAX) -1);
+    return (randN * sqrt(2./PrevLayerAmt));
 }
 
 void NeuralNet::loadBatch()

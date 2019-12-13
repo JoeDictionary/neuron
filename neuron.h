@@ -23,8 +23,15 @@ public:
     /* Sets activation function of the neuron. */
     void setActivation(double (*func)(double, double));
 
+    //! GEHÖRT DAS WIRKLICH IN DIESE KLASSE
     /* Fills the 'weights' vector with random weights. Amount of weights is input in 'nextLayerAmt'. */
     void assignRandomWeights(int nextLayerAmt);
+
+    /* Calculates the output-gradient or hidden-gradient depending on which layer a neuron is. */
+    double getGradient(int target, int ilayer, vector<double> prevLayer);
+
+    /* Calculates a neuron's input value for the activation function (from second layer (index: 1) on possible) */
+    double calcX(int ilayer, vector<double>& weights, vector<double> layer, int neuronAmt);
 
     /* Pointer to the activation function set by the constructor. */
     double (*activationFunction)(double, double);

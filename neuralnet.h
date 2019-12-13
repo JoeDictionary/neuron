@@ -28,8 +28,8 @@ public:
     /* NOT IMPLEMENTED */
     vector<double> activateLayer(vector<Neuron>& layer);
 
-    /* Generates random weights. */
-    double randWeight();
+    /* Generates a random weight. */
+    double randWeight(double PrevLayerAmt);
 
     /* Loads training data into the 'trainingData' vector. */
     void loadBatch();
