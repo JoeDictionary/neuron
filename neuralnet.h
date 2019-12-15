@@ -38,6 +38,9 @@ public:
     // ??? Maybe delete the entry as well, .clear() in loadBatach would not be needed ???
     void feedInput();
 
+    /* Returns the 'currentVal' of both output-neurons in a pair. */
+    pair<double, double> readOutput();
+
 private:
     /* Adds a vector of neurons, representing a layer in a neural net, to the 'net' vector. Sets each neuron's
     activation function to 'func'. */

@@ -72,5 +72,11 @@ void NeuralNet::feedInput()
     }
 }
 
+pair<double, double> NeuralNet::readOutput()
+{
+    int netSize = net.size();
+    return pair<double, double> (net[netSize - 1][0].currentVal, net[netSize - 1][1].currentVal);
+}
+
 
 
