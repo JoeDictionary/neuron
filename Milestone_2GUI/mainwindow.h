@@ -18,6 +18,7 @@ public:
 private slots:
     void on_spinBox_valueChanged(int arg1);
 
+    void makePlot();
 private:
     Ui::MainWindow *ui;
 };
