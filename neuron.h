@@ -23,9 +23,6 @@ public:
     /* Sets activation function of the neuron. */
     void setActivation(double (*func)(double, double));
 
-    /* Fills the 'weights' vector with random weights. Amount of weights is input in 'nextLayerAmt'. */
-    void assignRandomWeights(int nextLayerAmt);
-
     /* Pointer to the activation function set by the constructor. */
     double (*activationFunction)(double, double);
 

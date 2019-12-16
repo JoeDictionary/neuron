@@ -1,11 +1,14 @@
 #include "neuralnet.h"
+#include <ctime>
+#include <random>
 
-NeuralNet::NeuralNet(vector< pair <int, double (*)(double, double)> > topology)
+NeuralNet::NeuralNet(vector< pair <int, double (*)(double, double)> > netTopology)
 {
     /* Fills the 'net' vector with vectors<Neuron> to represent a neural network. */
-    for(pair <int, double (*)(double, double)> i : topology){
+    for(pair <int, double (*)(double, double)> i : netTopology){
         addLayer(i.first, i.second);
     }
+    topology = netTopology;
 }
 
 void NeuralNet::addLayer(int neuronAmt, double (*func)(double, double))
@@ -38,9 +41,13 @@ vector<double> NeuralNet::activateLayer(vector<Neuron>& layer)
     */
 }
 
-double NeuralNet::randWeight()
-{
 
+// NOT FINISHED
+void NeuralNet::initRandomWeights(int layer)
+{
+    srand(time(0));
+    double randNum = ((double)rand()*2 / ((double)RAND_MAX) - 1);
+    (randNum * sqrt(2./layer));
 }
 
 void NeuralNet::loadBatch()
@@ -76,6 +83,11 @@ pair<double, double> NeuralNet::readOutput()
 {
     int netSize = net.size();
     return pair<double, double> (net[netSize - 1][0].currentVal, net[netSize - 1][1].currentVal);
+}
+
+void NeuralNet::initRandomWeights()
+{
+
 }
 
 

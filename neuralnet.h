@@ -16,7 +16,7 @@ public:
      * The first pair in the vector of pairs represents the input layer, the last pait represents the output layer and
      * every pair inbetween represents a hidden layer.
      */
-    NeuralNet(vector< pair <int, double (*)(double, double)>> topology);
+    NeuralNet(vector< pair <int, double (*)(double, double)>> netTopology);
 
     /* Contains the structure of the neural net. Every element of the outer vector is represents a layer
      * and every element of the inner vector (vector of neurons) represents a neuron in the layer. */
@@ -41,7 +41,13 @@ public:
     /* Returns the 'currentVal' of both output-neurons in a pair. */
     pair<double, double> readOutput();
 
+    /* Fills the 'weights' vector with random weights. Amount of weights is input in 'nextLayerAmt'. */
+    void initRandomWeights(int layer);
+
 private:
+    /* Topology of the neural net. */
+    vector< pair <int, double (*)(double, double)>> topology;
+
     /* Adds a vector of neurons, representing a layer in a neural net, to the 'net' vector. Sets each neuron's
     activation function to 'func'. */
     void addLayer(int neurons, double (*func)(double, double));

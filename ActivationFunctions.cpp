@@ -10,12 +10,12 @@ namespace afunc {
     }
 
     double softmax(double x, double denominator){
-            return exp(x) / denominator;
+        return exp(x) / denominator;
     }
 
     double softmaxDeriv(double x, double denominator){
         double S = softmax(x, denominator);
-            return S*(1 - S);
+        return S*(1 - S);
     }
 
     double lRelu(double x, double useless){
@@ -28,5 +28,9 @@ namespace afunc {
             } else {
                 return 0.01;
             }
+    }
+
+    double lossFunc(double result, double target) {
+        return -log(abs(target - result));
     }
 }
