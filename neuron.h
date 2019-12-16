@@ -36,6 +36,14 @@ public:
     /* Value currently held by the neuron. */
     double currentVal;
 
+
+    void calcOutputGradients(double targetVal);
+
+  //  void calcHiddenGradients(const Layer &nextLayer);
+
+
+   // void updateInputWeights(Layer &prevLayer);
+
 private:
     /* Vector of weights on connections to the next layer. Length should be equal to the amount of neurons in the next
      * layer. The first weight corresponds to the first neuron of the next layer and so forth. */

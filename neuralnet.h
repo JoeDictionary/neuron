@@ -2,6 +2,7 @@
 #define NEURALNET_H
 #include <neuron.h>
 #include <ActivationFunctions.h>
+#include <QtMath>
 
 #include <QDirIterator>
 #include <QtDebug>
@@ -38,6 +39,9 @@ public:
     // ??? Maybe delete the entry as well, .clear() in loadBatach would not be needed ???
     void feedInput();
 
+    //it takes a vector with target values ad changes the weights
+    void backProp(const vector<double> &targetVals);
+
 private:
     /* Adds a vector of neurons, representing a layer in a neural net, to the 'net' vector. Sets each neuron's
     activation function to 'func'. */
@@ -48,6 +52,14 @@ private:
 
     /* Directory iterator for iterating over training files. */
     QDirIterator* dirIterator = new QDirIterator("C:/Users/Filip/Desktop/dataset_half/nqgp", QDir::Files);
+
+    //to calcutate the overall error
+    double m_error;
+    double m_recentAverageError;
+    double m_recentAverageSmoothingFactor;
+
+
+
 };
 
 #endif // NEURALNET_H

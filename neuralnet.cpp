@@ -40,7 +40,7 @@ vector<double> NeuralNet::activateLayer(vector<Neuron>& layer)
 
 double NeuralNet::randWeight()
 {
-
+// return rand()/double(RAND_MAX);}
 }
 
 void NeuralNet::loadBatch()
