@@ -15,10 +15,19 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void clearData();
+    void plot();
+
 private slots:
-    void on_spinBox_valueChanged(int arg1);
+    //void on_spinBox_valueChanged(int arg1);
 
     void makePlot();
+    //void on_pushButton_3_clicked();
+
+
+
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

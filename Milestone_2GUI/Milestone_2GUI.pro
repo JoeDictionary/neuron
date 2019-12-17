@@ -1,6 +1,6 @@
-QT       += core gui
+QT       += core gui printsupport
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
 
@@ -16,16 +16,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    ActivationFunctions.cpp \
     main.cpp \
     mainwindow.cpp \
+    neuralnet.cpp \
+    neuron.cpp \
     qcustomplot.cpp
 
 HEADERS += \
+    ActivationFunctions.h \
     mainwindow.h \
+    neuralnet.h \
+    neuron.h \
     qcustomplot.h
 
 FORMS += \
     mainwindow.ui
+
+
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
