@@ -1,6 +1,7 @@
 #include "neuron.h"
 #include <QCoreApplication>
 #include <iostream>
+#include <QRandomGenerator64>
 using namespace std;
 
 
@@ -58,15 +59,28 @@ void Neuron::setValue(double newInput){
     this->value=newInput;
 }
 
+void Neuron::setSum(double newInput){
+    this->sum=newInput;
+}
+
 // apply our function to the neuron's input
 void Neuron::calculate(vector<double> inputs, int position){
     this->value=activationFunction(inputs).at(position);
 }
 
 void Neuron::setWeightLength(int length){
+    QRandomGenerator64 rd;
     this->weights.clear();
     for(int i=0; i<length; i++){
-        this->weights.push_back(1.0);
+        this->weights.push_back(rd.generateDouble()*0.02);
+        this->new_weights.push_back(0);
+    }
+}
+
+void Neuron::printWeights(){
+
+    for(int i=0; i<this->weights.size(); i++){
+        cout << this->weights.at(i) << " ";
     }
 }
 

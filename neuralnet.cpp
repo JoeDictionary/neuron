@@ -49,8 +49,9 @@ void NeuralNet::setupNeuralNetwork(){
 //2c berechnet den Output fuer eine bestimmte Eingabe
 vector<Neuron> NeuralNet::getOutputFromInput(vector<double> input)
 {
+    std::cout << "\n\n-----------FORWARD-------------\n\n " << endl;
    //populate first neuron_layer vector with values from input layer
-   vector<Neuron> firstLayer = net.at(0);
+   vector<Neuron> &firstLayer = net.at(0);
    int index = 0;
     for(Neuron &neuron : firstLayer){
         neuron.setInput(input.at(index++));
@@ -60,23 +61,26 @@ vector<Neuron> NeuralNet::getOutputFromInput(vector<double> input)
 
     //go through all the layers in net, start with index 1, as we calculate values at this index based on the previous index
     for(int index_layer = 1; index_layer<net.size(); index_layer++){
-        vector<Neuron> currentLayer = net.at(index_layer);
+        vector<Neuron> &currentLayer = net.at(index_layer);
 
         //go through all the Neurons in the current layer
         for(int index_neuron_in_currlayer = 0; index_neuron_in_currlayer<currentLayer.size(); index_neuron_in_currlayer++){
-            Neuron currentNeuron = currentLayer.at(index_neuron_in_currlayer);
+            Neuron &currentNeuron = currentLayer.at(index_neuron_in_currlayer);
 
             double sum = 0;
             int index_prev_layer = 0;
 
+            //double denominator = 0.0;
+
             //harvest all the values from the previous layer
             for(Neuron &oneOfpreviousLayersNeurons : net.at(index_layer-1)){
-
                 sum += currentNeuron.weights.at(index_prev_layer) * oneOfpreviousLayersNeurons.value;
+                //denominator += exp(currentNeuron.weights.at(index_prev_layer)*oneOfpreviousLayersNeurons.value);
                 index_prev_layer++;
             }
             //run relu function with the sum of the previous layer values*weights
-            currentNeuron.setInput(afunc::lRelu(sum));
+            currentNeuron.setSum(sum);
+            currentNeuron.setInput(afunc::fast_sigmoid(sum));
         }
     }
 /*
@@ -150,4 +154,82 @@ std::cout << "\n\n neurons in layer: " << layer.size() << endl;
     }
 
     return net.at(layerCount-1);
+}
+
+//prints neural network
+void NeuralNet::print()
+{
+    std::cout << "\n\n-----------PRINT-------------\n\nlayer " << 0 << endl;
+    for(int index_neuron_in_currlayer = 0; index_neuron_in_currlayer<net.at(0).size(); index_neuron_in_currlayer++){
+        Neuron currentNeuron = net.at(0).at(index_neuron_in_currlayer);
+        std::cout << currentNeuron.value;
+        cout << endl;
+    }
+
+    //go through all the layers in net, start with index 1, as we calculate values at this index based on the previous index
+    for(int index_layer = 1; index_layer<net.size(); index_layer++){
+        vector<Neuron> currentLayer = net.at(index_layer);
+        std::cout << "layer " << index_layer << endl;
+
+        //go through all the Neurons in the current layer
+        for(int index_neuron_in_currlayer = 0; index_neuron_in_currlayer<currentLayer.size(); index_neuron_in_currlayer++){
+            Neuron currentNeuron = currentLayer.at(index_neuron_in_currlayer);
+
+            //harvest all the values from the previous layer
+            //for(Neuron &oneOfpreviousLayersNeurons : net.at(index_layer-1)){
+
+                //std::cout << oneOfpreviousLayersNeurons << endl;
+            //}
+            //run relu function with the sum of the previous layer values*weights
+            std::cout << currentNeuron.value << " : ";
+            currentNeuron.printWeights();
+            cout << endl;
+        }
+    }
+    // return the output layer;
+
+    for(Neuron n: net.at(layerCount-1)){
+        //cout << endl << n.value;
+    }
+
+}
+
+void NeuralNet::backPropagate(vector<double> targetOutput, int layerDiff)
+{
+    std::cout << "\n\n-----------BACK PROP-------------\n\n " << endl;
+    for(int i=0; i<net.at(layerCount-layerDiff).size(); i++){
+        Neuron &n = net.at(layerCount-layerDiff).at(i);
+        //cout << i << targetOutput.size() << endl;
+        double error = targetOutput.at(i)-n.value;
+
+        double delta_output_sum = afunc::fast_sigmoid_deriv(n.sum)*error;
+
+        //cout << "\ndelta_output_sum: " << delta_output_sum << "\n";
+
+        for(int e = 0; e < n.new_weights.size(); e++){
+            double &new_weight = n.new_weights.at(e);
+            double &weight = n.weights.at(e);
+            Neuron previousLayerNeuron = net.at(layerCount-layerDiff-1).at(e);
+            //cout << "prev " << previousLayerNeuron.value;
+            new_weight = weight + delta_output_sum / previousLayerNeuron.value;
+            //cout << "adding to weight " << weight << " " << delta_output_sum / previousLayerNeuron.value << endl;
+
+            if(layerCount-layerDiff > 0){
+                vector<double> NeuronValues;
+                for(Neuron n: ???)
+                this->backPropagate(NeuronValues, layerDiff-1);
+            }
+
+            weight = new_weight;
+        }
+/*
+        vector<double> delta_hidden_sum;
+        for(int i=0; i<n.weights.size(); i++){
+            double weigh = delta_output_sum / n.weights.at(i) * afunc::lReluDeriv(n.prevlayer.at(i).sum);
+            delta_hidden_sum.push_back(weigh);
+        }
+        afunc::lReluDeriv(n.value)*error;*/
+
+        cout << "error : " << error << endl;
+    }
 }

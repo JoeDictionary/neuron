@@ -20,11 +20,15 @@ public:
     vector<double> getNeuronOutput();
     void setInput(double);
     void setValue(double);
+    void setSum(double);
     void calculate(vector<double>, int);
     double weight;
     double value;
+    double sum;
     vector<double> weights;
+    vector<double> new_weights;
     void setWeightLength(int);
+    void printWeights();
 
 private:
     /* Vector of weights on connections to the next layer, also means the amount of neurons in the next

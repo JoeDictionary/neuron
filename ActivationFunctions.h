@@ -8,10 +8,14 @@ using namespace std;
 
 namespace afunc
 {
-    //double softmax(double z);
-    //double softmaxDeriv(double z);
+    double calcDenominator(vector<double> z);
+    double softmax(double, double);
+    double softmaxDeriv(double z);
     double lRelu(double);
-    //double lReluDeriv(double z);
+    double lReluDeriv(double z);
+
+    double fast_sigmoid(double);
+    double fast_sigmoid_deriv(double);
     //double softmax_at_index(double, int);
     //double lRelu_at_index(double, int);
 }

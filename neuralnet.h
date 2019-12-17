@@ -18,6 +18,9 @@ public:
     vector<Neuron> getOutputFromInput(vector<double> input);
 
     void setupNeuralNetwork();
+    void print();
+
+    void backPropagate(vector<double>, int);
 
 private:
     void addLayer(int neurons, double (*func)(double));
