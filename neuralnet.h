@@ -6,6 +6,8 @@
 #include <QDirIterator>
 #include <QtDebug>
 
+// 2a)
+
 class NeuralNet
 {
 public:
@@ -13,7 +15,7 @@ public:
      * where the function must take a vector<double> as input and also return a vector<double>.
      * Every pair represents a layer in the neural network, where the first part of the pair is the amount of neurons in
      * that layer and the second part is the activation function used by the neurons in that layer.
-     * The first pair in the vector of pairs represents the input layer, the last pait represents the output layer and
+     * The first pair in the vector of pairs represents the input layer, the last pair represents the output layer and
      * every pair inbetween represents a hidden layer.
      */
     NeuralNet(vector< pair <int, double (*)(double, double)>> netTopology);
@@ -31,6 +33,10 @@ public:
     /* Generates a random weight. */
     double randWeight(double prevLayAmt);
 
+    /* Fills the 'weights' vector with random weights. */
+    void initRandomWeights(vector<double> &weights);
+
+    // 2d)
     /* Loads training data into the 'trainingData' vector. */
     void loadBatch();
 
@@ -38,11 +44,9 @@ public:
     // ??? Maybe delete the entry as well, .clear() in loadBatach would not be needed ???
     void feedInput();
 
+    // 2b)
     /* Returns the 'currentVal' of both output-neurons in a pair. */
     pair<double, double> readOutput();
-
-    /* Fills the 'weights' vector with random weights. */
-    void initRandomWeights(vector<double> &weights);
 
 private:
     /* Topology of the neural net. */

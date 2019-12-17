@@ -6,6 +6,8 @@
 
 using namespace std;
 
+// 1a)
+
 class Neuron
 {
 public:
@@ -25,6 +27,12 @@ public:
 
     /* Pointer to the activation function set by the constructor. */
     double (*activationFunction)(double, double);
+
+    /* Calculates and returns output layer gradient for a neuron */
+    double getOutputGrad(int target);
+
+    /* Calculates and returns hidden layer gradient for a neuron */
+    double getHiddenGrad(int target, int indexOfLayer, int indexOfNeuron);
 
     /* List of "processed" results of neurons from the previous layer. Every result is the neuron's 'currentVal'
      * multiplied with the weight that leads to this neuron. */
