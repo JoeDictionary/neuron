@@ -28,8 +28,8 @@ public:
     /* NOT IMPLEMENTED */
     vector<double> activateLayer(vector<Neuron>& layer);
 
-    /* Generates random weights. */
-    double randWeight();
+    /* Generates a random weight. */
+    double randWeight(double prevLayAmt);
 
     /* Loads training data into the 'trainingData' vector. */
     void loadBatch();
@@ -41,8 +41,8 @@ public:
     /* Returns the 'currentVal' of both output-neurons in a pair. */
     pair<double, double> readOutput();
 
-    /* Fills the 'weights' vector with random weights. Amount of weights is input in 'nextLayerAmt'. */
-    void initRandomWeights(int layer);
+    /* Fills the 'weights' vector with random weights. */
+    void initRandomWeights(vector<double> &weights);
 
 private:
     /* Topology of the neural net. */

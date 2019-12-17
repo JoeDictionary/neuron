@@ -1,12 +1,12 @@
 #include "neuralnet.h"
 #include <ctime>
-#include <random>
+#include <cstdlib>
 
 NeuralNet::NeuralNet(vector< pair <int, double (*)(double, double)> > netTopology)
 {
     /* Fills the 'net' vector with vectors<Neuron> to represent a neural network. */
     for(pair <int, double (*)(double, double)> i : netTopology){
-        addLayer(i.first, i.second);
+        addLayer(i.first, i.second);  //first is list of values of layer i and second is activation function for layer i
     }
     topology = netTopology;
 }
@@ -41,15 +41,28 @@ vector<double> NeuralNet::activateLayer(vector<Neuron>& layer)
     */
 }
 
-
-// NOT FINISHED
-void NeuralNet::initRandomWeights(int layer)
+/* Calculates a weight for a neuron for the weights initialization */
+double NeuralNet::randWeight(double prevLayerAmt)
 {
-    srand(time(0));
-    double randNum = ((double)rand()*2 / ((double)RAND_MAX) - 1);
-    (randNum * sqrt(2./layer));
+    double randNum = ((double)rand() / ((double)RAND_MAX));
+    return (randNum * sqrt(2./prevLayerAmt));
 }
 
+/* Initializes the weights in the neural network (from every neuron to every neuron in the next layer) */
+void NeuralNet::initRandomWeights(vector<double> &weights)
+{
+    srand(time(0));
+    for (int i = 0; i < net.size() - 1; i++){  // i is a layer; last layer does not have weights to another layer
+        for (int j = 0; j < net[i].size(); j++){  // j is a neuron in layer i
+            for (int k; k < net[i+1].size(); k++){  // k is a neuron in the layer i+1
+                //weights[j to k] = randWeight(double(net[i].size())); // net[i].size() as the amount of neurons of previous layer
+            //! War mir nicht sicher wie ich die weights hier speichere; jedenfalls soll der weight von neuron j zu neuron k gespeichert werden
+            }
+        }
+    }
+}
+
+/* Loads batch into training data */
 void NeuralNet::loadBatch()
 {
     // Clears 'trainingData' list from already used data.
@@ -79,16 +92,14 @@ void NeuralNet::feedInput()
     }
 }
 
+/* Returns the 2 values of the output layer neurons as a pair */
 pair<double, double> NeuralNet::readOutput()
 {
     int netSize = net.size();
     return pair<double, double> (net[netSize - 1][0].currentVal, net[netSize - 1][1].currentVal);
 }
 
-void NeuralNet::initRandomWeights()
-{
 
-}
 
 
 

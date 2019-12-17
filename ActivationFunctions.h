@@ -8,6 +8,7 @@ using namespace std;
 
 namespace afunc
 {
+    double calcX(int indexOfLayer, int indexOfNeuron, vector<double> weights);
     double calcDenominator(vector<double> z);
     double softmax(double x, double denominator);
     double softmaxDeriv(double x, double denominator);
