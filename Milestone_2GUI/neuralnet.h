@@ -23,26 +23,23 @@ public:
      * and every element of the inner vector (vector of neurons) represents a neuron in the layer. */
     vector<vector<Neuron>> net;
 
+    /* Amount of files to load in one batch. Used by the 'loadBatch' function. */
+    int batchSize = 10;
+
     /* NOT IMPLEMENTED */
     vector<double> activateLayer(vector<Neuron>& layer);
 
     /* Generates random weights. */
     double randWeight();
 
-    /* Amount of files to load in one batch. Used by the 'loadBatch' function. */
-    int batchSize = 10;
-
-    /* Loads training data into the 'qgpTrainingData' or 'nqgpTrainingData' vector depending on 'type' and sets
-     * 'currentType' to true for qgp and false for nqgp. */
-    void loadBatch(bool type);
-
-    /* Type of data that is worked with. True for qgp and false for nqgp. */
-    bool currentType;
+    /* Loads training data into the 'trainingData' vector. */
+    void loadBatch();
 
     /* Feeds the input layer of the neural net with first entry of 'training data'. */
+    // ??? Maybe delete the entry as well, .clear() in loadBatach would not be needed ???
     void feedInput();
 
-    // Takes a vector with target values and changes the weights.
+    //it takes a vector with target values ad changes the weights
     void backProp(const vector<double> &targetVals);
 
 private:
@@ -51,17 +48,17 @@ private:
     void addLayer(int neurons, double (*func)(double, double));
 
     /* Contains current batch of training data. */
-    QStringList qgpTrainingData;
-    QStringList nqgpTrainingData;
+    QStringList trainingData;
 
-    /* Directory iterators for iterating over training files. */
-    QDirIterator* qgpDirIterator = new QDirIterator("C:/Users/Filip/Desktop/dataset_half/qgp", QDir::Files);
-    QDirIterator* nqgpDirIterator = new QDirIterator("C:/Users/Filip/Desktop/dataset_half/nqgp", QDir::Files);
+    /* Directory iterator for iterating over training files. */
+    QDirIterator* dirIterator = new QDirIterator("C:/Users/Filip/Desktop/dataset_half/nqgp", QDir::Files);
 
     //to calcutate the overall error
     double m_error;
     double m_recentAverageError;
     double m_recentAverageSmoothingFactor;
+
+
 
 };
 
