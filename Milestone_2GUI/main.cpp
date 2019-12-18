@@ -12,7 +12,6 @@ int main(int argc, char *argv[])
     w.show();    
 
     // Example Neural-Net Topology
-    /*
     vector<pair <int, double (*)(double, double)>> topology = {
     pair <int, double (*)(double, double)> (224000, afunc::lRelu),
     pair <int, double (*)(double, double)> (5, afunc::lRelu),
@@ -20,10 +19,10 @@ int main(int argc, char *argv[])
     pair <int, double (*)(double, double)> (2, afunc::lRelu)};
 
     NeuralNet myNet(topology);
+    myNet.setQgpDir("C:/Users/Filip/Desktop/dataset_half/qgp");
 
     myNet.loadBatch(true);
     myNet.feedInput();
-    */
 
     return a.exec();
 }
